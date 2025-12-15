@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "org.cardeira.cardeirapp",
+      "sha256_cert_fingerprints": [
+        "AE:E4:F3:AC:78:26:E7:A3:55:44:D2:81:DC:90:69:2C:1E:94:01:43:28:A9:0B:5E:CB:AE:11:67:8C:81:99:3E"
+      ]
+    }
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "57X9MD32BX.org.cardeira.cardeirapp",
+        "paths": [
+          "/app",
+          "/app/*"
+        ]
+      }
+    ]
+  }
+}
