@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:app_links/app_links.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(),
+      routes: {
+        '/hello': (context) => const HelloWorldPage(),
+      },
     );
   }
 }
@@ -47,6 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         _latestLink = 'Opened via: $uri';
       });
+      _handleDeepLink(uri);
     });
 
     try {
@@ -55,11 +60,26 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           _latestLink = 'App opened via: $uri';
         });
+        _handleDeepLink(uri);
       }
     } catch (e) {
       setState(() {
         _latestLink = 'Error: $e';
       });
+    }
+  }
+
+  Future<void> _handleDeepLink(Uri uri) async {
+    if (uri.path == '/hello' || uri.host == 'hello') {
+      final name = uri.queryParameters['name'];
+      if (name != null && name.isNotEmpty) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('user_name', name);
+
+        if (mounted) {
+          Navigator.pushNamed(context, '/hello');
+        }
+      }
     }
   }
 
