@@ -38,7 +38,8 @@ class _MainPageState extends State<MainPage> {
         setState(() {
           _latestLink = 'App opened via: $uri';
         });
-        _handleDeepLink(uri);
+        // Handle the initial link immediately to prevent Safari fallback
+        await _handleDeepLink(uri);
       }
     } catch (e) {
       setState(() {

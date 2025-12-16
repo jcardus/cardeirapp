@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HelloWorldPage extends StatefulWidget {
-  const HelloWorldPage({super.key});
+  final Uri? initialLink;
+
+  const HelloWorldPage({super.key, this.initialLink});
 
   @override
   State<HelloWorldPage> createState() => _HelloWorldPageState();
@@ -20,6 +22,21 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
 
   Future<void> _loadUserName() async {
     final prefs = await SharedPreferences.getInstance();
+
+    // If we have an initial link with a name parameter, save it
+    if (widget.initialLink != null) {
+      final name = widget.initialLink!.queryParameters['name'];
+      if (name != null && name.isNotEmpty) {
+        await prefs.setString('user_name', name);
+        setState(() {
+          _userName = name;
+          _isLoading = false;
+        });
+        return;
+      }
+    }
+
+    // Otherwise load from storage
     setState(() {
       _userName = prefs.getString('user_name');
       _isLoading = false;
