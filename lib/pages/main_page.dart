@@ -15,7 +15,8 @@ class _MainPageState extends State<MainPage> {
   final _appLinks = AppLinks();
   StreamSubscription<Uri>? _linkSubscription;
   String _latestLink = 'No deep link received yet';
-  final String _deepLinkUrl = 'cardeirapp://hello?name=joaquim';
+  //final String _deepLinkUrl = 'cardeirapp://app?name=joaquim';
+  final String _deepLinkUrl = 'https://cardeira.org/app?name=joaquim';
 
   @override
   void initState() {
