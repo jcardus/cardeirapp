@@ -204,7 +204,7 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.deepPurple.withOpacity(0.3),
+                            color: Colors.deepPurple.withValues(alpha: 0.3),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
