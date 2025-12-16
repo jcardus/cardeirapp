@@ -15,7 +15,7 @@ class _MainPageState extends State<MainPage> {
   final _appLinks = AppLinks();
   StreamSubscription<Uri>? _linkSubscription;
   String _latestLink = 'No deep link received yet';
-  final String _deepLinkUrl = 'https://cardeira.org/app';
+  final String _deepLinkUrl = 'cardeirapp://hello?name=joaquim';
 
   @override
   void initState() {
@@ -47,14 +47,13 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future<void> _handleDeepLink(Uri uri) async {
-    if (uri.path == '/hello' || uri.host == 'hello') {
+    if (uri.path == '/app') {
       final name = uri.queryParameters['name'];
       if (name != null && name.isNotEmpty) {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_name', name);
-
         if (mounted) {
-          Navigator.pushNamed(context, '/hello');
+          Navigator.pushNamed(context, '/app');
         }
       }
     }
