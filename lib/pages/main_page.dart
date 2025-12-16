@@ -47,7 +47,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future<void> _handleDeepLink(Uri uri) async {
-    if (uri.path == '/app') {
+    if (uri.path == '/app' || uri.host == 'app') {
       final name = uri.queryParameters['name'];
       if (name != null && name.isNotEmpty) {
         final prefs = await SharedPreferences.getInstance();
