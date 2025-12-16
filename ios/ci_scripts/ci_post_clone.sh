@@ -29,6 +29,6 @@ flutter pub get
 
 # Build Flutter iOS app
 echo "🔨 Building Flutter iOS app..."
-flutter build ios --config-only --no-codesign"
+flutter build ios --config-only --no-codesign
 
 echo "✅ Flutter build completed successfully!"
