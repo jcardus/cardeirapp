@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:app_links/app_links.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
@@ -15,8 +14,6 @@ class _MainPageState extends State<MainPage> {
   final _appLinks = AppLinks();
   StreamSubscription<Uri>? _linkSubscription;
   String _latestLink = 'No deep link received yet';
-  //final String _deepLinkUrl = 'cardeirapp://app?name=joaquim';
-  final String _deepLinkUrl = 'https://cardeira.org/app?name=joaquim';
 
   @override
   void initState() {
@@ -81,30 +78,8 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                'Scan this QR Code to open the app:',
+                'Please open the with a deep link',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 30),
-              QrImageView(
-                data: _deepLinkUrl,
-                version: QrVersions.auto,
-                size: 250.0,
-                backgroundColor: Colors.white,
-              ),
-              const SizedBox(height: 30),
-              Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: SelectableText(
-                  _deepLinkUrl,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontFamily: 'monospace',
-                  ),
-                ),
               ),
               const SizedBox(height: 30),
               Container(
