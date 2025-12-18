@@ -111,6 +111,20 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: const Text('Tio Carlitos'),
               ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/vizcolas');
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+                child: const Text('Vizcolas'),
+              ),
             ],
           ),
         ),
