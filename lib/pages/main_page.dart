@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:app_links/app_links.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -52,7 +53,8 @@ class _MainPageState extends State<MainPage> {
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('user_name', name);
         if (mounted) {
-          Navigator.pushNamed(context, '/app');
+          dev.log('push /$name');
+          Navigator.pushNamed(context, '/$name');
         }
       }
     }
@@ -94,6 +96,20 @@ class _MainPageState extends State<MainPage> {
                   style: const TextStyle(fontSize: 14),
                   textAlign: TextAlign.center,
                 ),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/tio_carlitos');
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 15,
+                  ),
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
+                child: const Text('Go to Tio Carlitos'),
               ),
             ],
           ),

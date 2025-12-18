@@ -1,46 +1,55 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class HelloWorldPage extends StatefulWidget {
-  final Uri? initialLink;
-
-  const HelloWorldPage({super.key, this.initialLink});
+class TioCarlitosPage extends StatefulWidget {
+  const TioCarlitosPage({super.key});
 
   @override
-  State<HelloWorldPage> createState() => _HelloWorldPageState();
+  State<TioCarlitosPage> createState() => _TioCarlitosPageState();
 }
 
-class _HelloWorldPageState extends State<HelloWorldPage> {
+class _TioCarlitosPageState extends State<TioCarlitosPage> {
   String? _userName;
   bool _isLoading = true;
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  bool _isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     _loadUserName();
+    _setupAudioPlayer();
+  }
+
+  void _setupAudioPlayer() {
+    _audioPlayer.onPlayerStateChanged.listen((state) {
+      setState(() {
+        _isPlaying = state == PlayerState.playing;
+      });
+    });
   }
 
   Future<void> _loadUserName() async {
     final prefs = await SharedPreferences.getInstance();
-
-    // If we have an initial link with a name parameter, save it
-    if (widget.initialLink != null) {
-      final name = widget.initialLink!.queryParameters['name'];
-      if (name != null && name.isNotEmpty) {
-        await prefs.setString('user_name', name);
-        setState(() {
-          _userName = name;
-          _isLoading = false;
-        });
-        return;
-      }
-    }
-
-    // Otherwise load from storage
     setState(() {
       _userName = prefs.getString('user_name');
       _isLoading = false;
     });
+  }
+
+  Future<void> _playAudio() async {
+    if (_isPlaying) {
+      await _audioPlayer.pause();
+    } else {
+      await _audioPlayer.play(AssetSource('tio_carlitos.mp3'));
+    }
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,7 +57,7 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Hello World'),
+        title: const Text('Tio Carlitos'),
       ),
       body: Center(
         child: Padding(
@@ -109,6 +118,19 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
                             textAlign: TextAlign.center,
                           ),
                         ],
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    ElevatedButton.icon(
+                      onPressed: _playAudio,
+                      icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
+                      label: Text(_isPlaying ? 'Pause Audio' : 'Play Audio'),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 30,
+                          vertical: 15,
+                        ),
+                        textStyle: const TextStyle(fontSize: 18),
                       ),
                     ),
                     const SizedBox(height: 40),
