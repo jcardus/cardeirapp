@@ -31,9 +31,7 @@ class _TioCarlitosPageState extends State<TioCarlitosPage> {
   }
 
   Future<void> _loadUserName() async {
-    final prefs = await SharedPreferences.getInstance();
     setState(() {
-      _userName = prefs.getString('user_name');
       _isLoading = false;
     });
   }
