@@ -62,7 +62,7 @@
 			</array>
 		</dict>
 	</array>
-photo	<key>NSCameraUsageDescription</key>
+	<key>NSCameraUsageDescription</key>
 	<string>This app needs access to the camera to take selfies.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>This app needs access to the microphone for video recording.</string>
