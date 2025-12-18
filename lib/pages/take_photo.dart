@@ -118,7 +118,7 @@ class _TakePhotoState extends State<TakePhoto> {
 
     final smsUrl = '$gwUrl?gateway=sns&token=$gwToken&msisdn=${Uri.encodeComponent(phoneNumber)}&message=${Uri.encodeComponent(message)}';
 
-    dev.log('$smsUrl');
+    dev.log(smsUrl);
 
     final response = await http.get(Uri.parse(smsUrl));
 
