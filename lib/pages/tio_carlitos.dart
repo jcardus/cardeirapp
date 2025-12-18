@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'tio_carlitos2.dart';
 
 class TioCarlitosPage extends StatefulWidget {
   const TioCarlitosPage({super.key});
@@ -10,7 +11,6 @@ class TioCarlitosPage extends StatefulWidget {
 }
 
 class _TioCarlitosPageState extends State<TioCarlitosPage> {
-  String? _userName;
   bool _isLoading = true;
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool _isPlaying = false;
@@ -89,30 +89,11 @@ class _TioCarlitosPageState extends State<TioCarlitosPage> {
                       ),
                       child: Column(
                         children: [
-                          const Icon(
-                            Icons.waving_hand,
-                            size: 60,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(height: 20),
-                          Text(
-                            _userName != null
-                                ? 'Hello, $_userName!'
-                                : 'Hello, World!',
-                            style: const TextStyle(
-                              fontSize: 32,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
                           const SizedBox(height: 10),
                           Text(
-                            _userName != null
-                                ? 'Your info was loaded from local storage'
-                                : 'No user info found. Try opening a deeplink with a name parameter.',
+                           'Preciso que cales o pessoal para que consigas ouvir a mensagem. Idealmente ligas o telefone a uma coluna bluetooth. Quando tiveres pronto carrega no botão.',
                             style: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 20,
                               color: Colors.white70,
                             ),
                             textAlign: TextAlign.center,
@@ -124,7 +105,7 @@ class _TioCarlitosPageState extends State<TioCarlitosPage> {
                     ElevatedButton.icon(
                       onPressed: _playAudio,
                       icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow),
-                      label: Text(_isPlaying ? 'Pause Audio' : 'Play Audio'),
+                      label: Text('Dale'),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
@@ -134,53 +115,23 @@ class _TioCarlitosPageState extends State<TioCarlitosPage> {
                       ),
                     ),
                     const SizedBox(height: 40),
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.grey[300]!),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TioCarlitos2(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 50,
+                          vertical: 15,
+                        ),
+                        textStyle: const TextStyle(fontSize: 18),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'How to test:',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            '1. Use a deeplink like:',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          const SizedBox(height: 5),
-                          SelectableText(
-                            'cardeirapp://hello?name=John',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'monospace',
-                              color: Colors.deepPurple[700],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                          const Text(
-                            'or',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          const SizedBox(height: 5),
-                          SelectableText(
-                            'https://cardeira.org/app/hello?name=John',
-                            style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: 'monospace',
-                              color: Colors.deepPurple[700],
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: const Text('Continuar'),
                     ),
                   ],
                 ),

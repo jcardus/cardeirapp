@@ -109,7 +109,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
-                child: const Text('Go to Tio Carlitos'),
+                child: const Text('Tio Carlitos'),
               ),
             ],
           ),
