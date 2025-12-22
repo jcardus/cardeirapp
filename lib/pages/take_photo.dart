@@ -1,10 +1,10 @@
 import 'dart:developer' as dev;
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 import 'package:image/image.dart' as img;
 import '../config/cloudflare_config.dart';
 
@@ -129,10 +129,9 @@ class _TakePhotoState extends State<TakePhoto> {
     dev.log('SMS sent successfully');
   }
 
-  Future<File> _addTextToImage(File imageFile, String text) async {
-    // Read the image file
-    final bytes = await imageFile.readAsBytes();
-    img.Image? image = img.decodeImage(bytes);
+  Future<Uint8List> _addTextToImage(Uint8List imageBytes, String text) async {
+    // Decode the image
+    img.Image? image = img.decodeImage(imageBytes);
 
     if (image == null) {
       throw Exception('Failed to decode image');
@@ -169,12 +168,9 @@ class _TakePhotoState extends State<TakePhoto> {
       color: img.ColorRgb8(255, 255, 255), // White text
     );
 
-    // Save the modified image
+    // Return the modified image as bytes
     final modifiedBytes = img.encodeJpg(image, quality: 95);
-    final modifiedFile = File('${imageFile.path}_modified.jpg');
-    await modifiedFile.writeAsBytes(modifiedBytes);
-
-    return modifiedFile;
+    return Uint8List.fromList(modifiedBytes);
   }
 
   Future<void> _uploadPhoto() async {
@@ -185,11 +181,11 @@ class _TakePhotoState extends State<TakePhoto> {
     });
 
     try {
-      final file = File(_capturedImage!.path);
+      // Read the captured image as bytes
+      final originalBytes = await _capturedImage!.readAsBytes();
 
-      // Add text overlay to the image
-      final modifiedFile = await _addTextToImage(file, 'Natal 2026');
-      final bytes = await modifiedFile.readAsBytes();
+      // Add text overlay to the image (works with bytes, no file system needed)
+      final bytes = await _addTextToImage(originalBytes, 'Natal 2026');
 
       final request = http.MultipartRequest(
         'POST',
