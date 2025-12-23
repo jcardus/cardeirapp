@@ -32,7 +32,14 @@ jobs:
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web --release
+        run: flutter build web --release --dart-define=IMAGE_WORKER_URL=${{ secrets.IMAGE_WORKER_URL }}
+
+      - name: Stamp version info
+        run: |
+          BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          echo "Build date: $BUILD_DATE"
+          sed -i "s/BUILD_DATE_PLACEHOLDER/$BUILD_DATE/g" build/web/index.html
+          echo "✓ Version stamp added"
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
