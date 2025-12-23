@@ -2,6 +2,7 @@ import 'dart:developer' as dev;
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:http/http.dart' as http;
@@ -187,13 +188,21 @@ class _TakePhotoState extends State<TakePhoto> {
       // Add text overlay to the image (works with bytes, no file system needed)
       final bytes = await _addTextToImage(originalBytes, 'Natal 2026');
 
+      // Use worker URL for web, direct API for mobile
+      final uploadUrl = CloudflareConfig.getUploadEndpoint(isWeb: kIsWeb);
+
       final request = http.MultipartRequest(
         'POST',
-        Uri.parse(CloudflareConfig.uploadEndpoint),
+        Uri.parse(uploadUrl),
       );
 
-      dev.log('${CloudflareConfig.uploadEndpoint} ${CloudflareConfig.apiToken}');
-      request.headers['Authorization'] = 'Bearer ${CloudflareConfig.apiToken}';
+      dev.log('Uploading to: $uploadUrl (isWeb: $kIsWeb)');
+
+      // Only add Authorization header for direct API calls (mobile)
+      // Worker handles authentication internally
+      if (!kIsWeb) {
+        request.headers['Authorization'] = 'Bearer ${CloudflareConfig.apiToken}';
+      }
 
       request.files.add(
         http.MultipartFile.fromBytes(

@@ -44,3 +44,9 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 /android/keystore
+
+# Cloudflare Workers / Wrangler
+cloudflare-worker/.wrangler/
+cloudflare-worker/node_modules/
+cloudflare-worker/.dev.vars
+cloudflare-worker/.env

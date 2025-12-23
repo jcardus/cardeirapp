@@ -29,7 +29,22 @@ class CloudflareConfig {
     defaultValue: '+351912381488',
   );
 
-  // Cloudflare Images API endpoint
+  // Cloudflare Worker URL for web uploads (bypasses CORS)
+  static const String workerUrl = String.fromEnvironment(
+    'IMAGE_WORKER_URL',
+    defaultValue: '',
+  );
+
+  // Cloudflare Images API endpoint (for mobile apps)
   static String get uploadEndpoint =>
       'https://api.cloudflare.com/client/v4/accounts/$accountId/images/v1';
+
+  // Get the appropriate upload endpoint based on platform
+  static String getUploadEndpoint({required bool isWeb}) {
+    // For web, use the worker if available, otherwise fall back to direct API
+    if (isWeb && workerUrl.isNotEmpty) {
+      return workerUrl;
+    }
+    return uploadEndpoint;
+  }
 }
