@@ -20,6 +20,11 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="description" content="CardeirApp">
 
+  <!-- App Version & Build Info -->
+  <meta name="app-version" content="1.0.1">
+  <meta name="build-number" content="1">
+  <meta name="build-date" content="BUILD_DATE_PLACEHOLDER">
+
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -31,8 +36,43 @@
 
   <title>cardeirapp</title>
   <link rel="manifest" href="manifest.json">
+
+  <style>
+    #version-info {
+      position: fixed;
+      bottom: 5px;
+      right: 5px;
+      font-size: 10px;
+      color: rgba(0,0,0,0.3);
+      font-family: monospace;
+      z-index: 9999;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
+  <!-- Version display (optional - remove if you don't want it visible) -->
+  <div id="version-info"></div>
+
+  <script>
+    // Make version info easily accessible in console
+    window.appVersion = {
+      version: document.querySelector('meta[name="app-version"]').content,
+      buildNumber: document.querySelector('meta[name="build-number"]').content,
+      buildDate: document.querySelector('meta[name="build-date"]').content,
+    };
+
+    // Display version in bottom right corner
+    const versionDiv = document.getElementById('version-info');
+    if (versionDiv) {
+      versionDiv.textContent = `v${window.appVersion.version}`;
+      versionDiv.title = `Build: ${window.appVersion.buildDate}`;
+    }
+
+    // Log version info to console
+    console.log('App Version:', window.appVersion);
+  </script>
+
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
