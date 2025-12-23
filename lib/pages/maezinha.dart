@@ -88,9 +88,8 @@ class _MaezinhaPageState extends State<MaezinhaPage> with TickerProviderStateMix
       // Play the first sound
       await _audioPlayer.play(AssetSource('orchestral-win-331233.mp3'));
 
-      // Listen for when the first sound completes
-      _audioPlayer.onPlayerComplete.first.then((_) {
-        // Play the second sound when first one finishes
+      // Wait 10 seconds, then play the second sound
+      Future.delayed(const Duration(seconds: 10), () {
         _audioPlayer.play(AssetSource('good-luck-babe.mp3'));
       });
     } catch (e) {
