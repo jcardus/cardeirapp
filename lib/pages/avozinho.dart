@@ -17,16 +17,16 @@ class _AvozinhoPageState extends State<AvozinhoPage> {
 
   final List<Map<String, dynamic>> _questions = [
     {
-      'question': 'Usas muito o telemóvel?',
-      'answers': ['Sim, bastante', 'De vez em quando', 'Nem por isso'],
+      'question': 'Preferes fazer as coisas com as mãos livres ou ocupadas?',
+      'answers': ['Mãos livres', 'Tanto faz', 'Depende'],
     },
     {
-      'question': 'Já te cansaste de segurar o telemóvel?',
-      'answers': ['Sim, às vezes', 'Raramente', 'Nunca'],
+      'question': 'Gostas de ter as coisas bem organizadas e no lugar?',
+      'answers': ['Sim, sempre', 'De vez em quando', 'Nem por isso'],
     },
     {
-      'question': 'O que achas de ter um suporte para o telemóvel?',
-      'answers': ['Seria útil!', 'Boa ideia', 'Interessante'],
+      'question': 'O que valorizas mais: praticidade ou tradição?',
+      'answers': ['Praticidade', 'Tradição', 'Ambas'],
     },
   ];
 
