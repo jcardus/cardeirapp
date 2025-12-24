@@ -3,30 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:developer' as dev;
 
-class NunoPage extends StatefulWidget {
-  const NunoPage({super.key});
+class MarioPage extends StatefulWidget {
+  const MarioPage({super.key});
 
   @override
-  State<NunoPage> createState() => _NunoPageState();
+  State<MarioPage> createState() => _MarioPageState();
 }
 
-class _NunoPageState extends State<NunoPage> {
+class _MarioPageState extends State<MarioPage> {
   int _currentQuestion = 0;
   bool _showGift = false;
   final List<String> _userAnswers = [];
 
   final List<Map<String, dynamic>> _questions = [
     {
-      'question': 'Gostas de tirar fotografias?',
-      'answers': ['Sim', 'Não', 'Às vezes'],
+      'question': 'Gostas de ouvir música?',
+      'answers': ['Sim, adoro!', 'Não muito', 'Às vezes'],
     },
     {
-      'question': 'Já tiraste uma selfie num sítio estranho?',
-      'answers': ['Sim', 'Não', 'Talvez'],
+      'question': 'Preferes música alta ou baixa?',
+      'answers': ['Alta!', 'Baixa', 'Depende do momento'],
     },
     {
-      'question': 'O que achas de ter mais estabilidade nas tuas fotos?',
-      'answers': ['Ótimo!', 'Interessante', 'Porquê?'],
+      'question': 'O que achas de ter som de qualidade sempre contigo?',
+      'answers': ['Perfeito!', 'Interessante', 'Boa ideia'],
     },
   ];
 
@@ -63,7 +63,7 @@ class _NunoPageState extends State<NunoPage> {
   }
 
   void _sendAnswersToPush() {
-    final message = '''Nuno respondeu:
+    final message = '''Mario respondeu:
 Q1: ${_questions[0]['question']}
 A: ${_userAnswers[0]}
 
@@ -81,7 +81,7 @@ A: ${_userAnswers[2]}''';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Nuno'),
+        title: const Text('Mario'),
       ),
       body: Center(
         child: Padding(
@@ -103,8 +103,8 @@ A: ${_userAnswers[2]}''';
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue.shade300,
-                Colors.blue.shade600,
+                Colors.purple.shade300,
+                Colors.purple.shade600,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -112,7 +112,7 @@ A: ${_userAnswers[2]}''';
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withValues(alpha: 0.3),
+                color: Colors.purple.withValues(alpha: 0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -181,7 +181,7 @@ A: ${_userAnswers[2]}''';
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.purple,
           ),
         ),
         const SizedBox(height: 20),
@@ -196,12 +196,12 @@ A: ${_userAnswers[2]}''';
         Container(
           padding: const EdgeInsets.all(30),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: Colors.purple.shade50,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.blue.shade200, width: 2),
+            border: Border.all(color: Colors.purple.shade200, width: 2),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withValues(alpha: 0.1),
+                color: Colors.purple.withValues(alpha: 0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -210,23 +210,23 @@ A: ${_userAnswers[2]}''';
           child: Column(
             children: [
               const Icon(
-                Icons.camera_alt,
+                Icons.headphones,
                 size: 60,
-                color: Colors.blue,
+                color: Colors.purple,
               ),
               const SizedBox(height: 20),
               const Text(
-                'Amazon Basics\nTrípode Flexible',
+                'Earbuds',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.purple,
                 ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 5),
               Text(
-                'Perfeito para as tuas fotografias!',
+                'Som de qualidade para onde quer que vás!',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.shade600,

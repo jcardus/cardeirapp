@@ -3,30 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:developer' as dev;
 
-class NunoPage extends StatefulWidget {
-  const NunoPage({super.key});
+class AvozinhoPage extends StatefulWidget {
+  const AvozinhoPage({super.key});
 
   @override
-  State<NunoPage> createState() => _NunoPageState();
+  State<AvozinhoPage> createState() => _AvozinhoPageState();
 }
 
-class _NunoPageState extends State<NunoPage> {
+class _AvozinhoPageState extends State<AvozinhoPage> {
   int _currentQuestion = 0;
   bool _showGift = false;
   final List<String> _userAnswers = [];
 
   final List<Map<String, dynamic>> _questions = [
     {
-      'question': 'Gostas de tirar fotografias?',
-      'answers': ['Sim', 'Não', 'Às vezes'],
+      'question': 'Usas muito o telemóvel?',
+      'answers': ['Sim, bastante', 'De vez em quando', 'Nem por isso'],
     },
     {
-      'question': 'Já tiraste uma selfie num sítio estranho?',
-      'answers': ['Sim', 'Não', 'Talvez'],
+      'question': 'Já te cansaste de segurar o telemóvel?',
+      'answers': ['Sim, às vezes', 'Raramente', 'Nunca'],
     },
     {
-      'question': 'O que achas de ter mais estabilidade nas tuas fotos?',
-      'answers': ['Ótimo!', 'Interessante', 'Porquê?'],
+      'question': 'O que achas de ter um suporte para o telemóvel?',
+      'answers': ['Seria útil!', 'Boa ideia', 'Interessante'],
     },
   ];
 
@@ -63,7 +63,7 @@ class _NunoPageState extends State<NunoPage> {
   }
 
   void _sendAnswersToPush() {
-    final message = '''Nuno respondeu:
+    final message = '''Avozinho respondeu:
 Q1: ${_questions[0]['question']}
 A: ${_userAnswers[0]}
 
@@ -81,7 +81,7 @@ A: ${_userAnswers[2]}''';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Nuno'),
+        title: const Text('Avozinho'),
       ),
       body: Center(
         child: Padding(
@@ -103,8 +103,8 @@ A: ${_userAnswers[2]}''';
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                Colors.blue.shade300,
-                Colors.blue.shade600,
+                Colors.teal.shade300,
+                Colors.teal.shade600,
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -112,7 +112,7 @@ A: ${_userAnswers[2]}''';
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withValues(alpha: 0.3),
+                color: Colors.teal.withValues(alpha: 0.3),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -181,7 +181,7 @@ A: ${_userAnswers[2]}''';
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Colors.blue,
+            color: Colors.teal,
           ),
         ),
         const SizedBox(height: 20),
@@ -196,12 +196,12 @@ A: ${_userAnswers[2]}''';
         Container(
           padding: const EdgeInsets.all(30),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: Colors.teal.shade50,
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.blue.shade200, width: 2),
+            border: Border.all(color: Colors.teal.shade200, width: 2),
             boxShadow: [
               BoxShadow(
-                color: Colors.blue.withValues(alpha: 0.1),
+                color: Colors.teal.withValues(alpha: 0.1),
                 blurRadius: 10,
                 offset: const Offset(0, 5),
               ),
@@ -210,23 +210,23 @@ A: ${_userAnswers[2]}''';
           child: Column(
             children: [
               const Icon(
-                Icons.camera_alt,
+                Icons.phone_android,
                 size: 60,
-                color: Colors.blue,
+                color: Colors.teal,
               ),
               const SizedBox(height: 20),
               const Text(
-                'Amazon Basics\nTrípode Flexible',
+                'Amazon Basics\nSuporte ajustável para telemóvel',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.blue,
+                  color: Colors.teal,
                 ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 5),
               Text(
-                'Perfeito para as tuas fotografias!',
+                'Para usares o telemóvel com mais comodidade!',
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey.shade600,
@@ -262,6 +262,7 @@ A: ${_userAnswers[2]}''';
             setState(() {
               _currentQuestion = 0;
               _showGift = false;
+              _userAnswers.clear();
             });
           },
           icon: const Icon(Icons.replay),

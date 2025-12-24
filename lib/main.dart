@@ -5,6 +5,9 @@ import 'pages/vizcolas.dart';
 import 'pages/maezinha.dart';
 import 'pages/madoquinhas.dart';
 import 'pages/nuno.dart';
+import 'pages/mario.dart';
+import 'pages/avozinha.dart';
+import 'pages/avozinho.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +32,9 @@ class MyApp extends StatelessWidget {
         '/maezinha': (context) => const MaezinhaPage(),
         '/madoquinhas': (context) => const MadoquinhasPage(),
         '/nuno': (context) => const NunoPage(),
+        '/mario': (context) => const MarioPage(),
+        '/avozinha': (context) => const AvozinhaPage(),
+        '/avozinho': (context) => const AvozinhoPage(),
       },
     );
   }
