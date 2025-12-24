@@ -4,6 +4,7 @@ import 'pages/tio_carlitos.dart';
 import 'pages/vizcolas.dart';
 import 'pages/maezinha.dart';
 import 'pages/madoquinhas.dart';
+import 'pages/nuno.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         '/viczolas': (context) => const VizcolasPage(),
         '/maezinha': (context) => const MaezinhaPage(),
         '/madoquinhas': (context) => const MadoquinhasPage(),
+        '/nuno': (context) => const NunoPage(),
       },
     );
   }
